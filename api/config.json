@@ -1,0 +1,12 @@
+{
+  "server" : {
+
+  },
+  "db" : {
+    "host" : "localhost",
+    "user" : "root",
+    "password" : "",
+    "database" : "dutch_dictionary"
+  }
+
+}

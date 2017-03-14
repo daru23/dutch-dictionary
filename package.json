@@ -6,9 +6,10 @@
   "dependencies": {
     "hapi": "^16.1.0",
     "joi": "^10.2.2",
+    "mysql": "^2.13.0",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
-    "sql": "^0.74.0"
+    "promise": "^7.1.1"
   },
   "devDependencies": {
     "node-sass": "^4.5.0",
