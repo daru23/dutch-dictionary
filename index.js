@@ -1,3 +1,12 @@
+/**
+ * Created by Daniela Ruiz
+ * Date: 14/03/2017
+ * Email: daru015@gmail.com
+ *
+ * File: index.js
+ * Frontend server
+ */
+
 const http = require('http');
 
 const hostname = 'localhost';
