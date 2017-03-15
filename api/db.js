@@ -21,34 +21,41 @@ var pool  = mysql.createPool({
 
 
 
-function getAllWords () {
-    return new Promise(function (resolve, reject) {
-        "use strict";
-        pool.getConnection(function(err, connection) {
-            // Use the connection
-            connection.query('SELECT * FROM word', function (error, results, fields) {
-                // And done with the connection.
-                connection.release();
+module.exports = {
 
-                // Handle error after the release.
-                if (error) reject(error);
+    getAllWords : function  () {
+        return new Promise(function (resolve, reject) {
+            "use strict";
+            pool.getConnection(function(err, connection) {
+                // Use the connection
+                connection.query('SELECT * FROM word', function (error, results, fields) {
+                    // And done with the connection.
+                    connection.release();
 
-                resolve(results);
-                // Don't use the connection here, it has been returned to the pool.
+                    // Handle error after the release.
+                    if (error) reject(error);
+
+                    resolve(results);
+                    // Don't use the connection here, it has been returned to the pool.
+                });
             });
         });
-    });
-}
+    },
 
-function closePoolConnection () {
-    "use strict";
-    pool.end(function (err) {
+    closePoolConnection : function  () {
+        "use strict";
+        pool.end(function (err) {
         // all connections in the pool have ended
-    });
+    })
 }
+};
+
+
+
+
 
 // use example
-getAllWords().then(function (res) {
-    console.log(res);
-    closePoolConnection();
-});
+// getAllWords().then(function (res) {
+//     console.log(res);
+//     closePoolConnection();
+// });

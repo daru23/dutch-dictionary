@@ -23,6 +23,12 @@ var routes = [
                 params: {word: Joi.string()}
             }
         }
+    },
+    {   method   : 'GET',
+        path     : '/words',
+        config   : {
+            handler  : handler.getAllWords
+        }
     }
 ];
 

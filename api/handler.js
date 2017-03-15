@@ -7,6 +7,8 @@
  * Functions handlers for Hapi requests
  */
 
+const db = require('./db.js');
+
 /**
  * word
  * GET word
@@ -19,5 +21,15 @@ exports.word = function (req, res){
 
     //SQL connection to get the word
     res({msg : 'Hello ' + word + '!'});
+
+};
+
+exports.getAllWords = function (req, res){
+
+    db.getAllWords().then(function (words) {
+        console.log(words);
+        //SQL close connection
+        res ({mes : words});
+    });
 
 };
