@@ -23,12 +23,50 @@ var pool  = mysql.createPool({
 
 module.exports = {
 
+    setWord : function  (object) {
+        return new Promise(function (resolve, reject) {
+            "use strict";
+            pool.getConnection(function(err, connection) {
+                // Use the connection
+                connection.query('INSERT INTO `word` (`name`, `comment`, `is_label`) VALUES ("'+object.name+'","'+object.comment+'", "'+object.is_label+'")', function (error, result) {
+                    // And done with the connection.
+                    connection.release();
+
+                    // Handle error after the release.
+                    if (error) reject(error);
+                    resolve(result);
+                    // Don't use the connection here, it has been returned to the pool.
+                });
+            });
+        });
+    },
+    setWordTranslation : function  (object) {
+        return new Promise(function (resolve, reject) {
+            "use strict";
+            pool.getConnection(function(err, connection) {
+                // Use the connection
+                //INSERT INTO `translation` (`id_translation`, `id_lang`, `id_word`, `translation`) VALUES (10, 1, 5, 'book');
+
+                connection.query('INSERT INTO `translation` (`id_lang`, `id_word`, `translation`) VALUES("'+object.id_lang+'","'+object.id_word+'", "'+object.translation+'")', function (error, result) {
+                    // And done with the connection.
+                    connection.release();
+
+                    // Handle error after the release.
+                    if (error) reject(error);
+
+                    resolve(result);
+                    // Don't use the connection here, it has been returned to the pool.
+                });
+            });
+        });
+    },
+
     getAllWords : function  () {
         return new Promise(function (resolve, reject) {
             "use strict";
             pool.getConnection(function(err, connection) {
                 // Use the connection
-                connection.query('SELECT * FROM word INNER JOIN ', function (error, results, fields) {
+                connection.query('SELECT `word`.name, `translation`.`translation` FROM `word` INNER JOIN `translation` USING(`id_word`)', function (error, results, fields) {
                     // And done with the connection.
                     connection.release();
 
