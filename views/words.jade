@@ -26,23 +26,3 @@ html(lang="en")
                         .form-group
                             input(type="text", placeholder="Search").form-control
                             button(type="submit").btn.btn-default Search
-        div.table-responsive
-            table.table
-                each word, i in words
-                    if ((i % 4) == 0)
-                        tr
-                    td
-                        div(id="card-#{i}").card.style
-                            div.front.alert.alert-info.front
-                                strong.strong #{word.name}
-                                    br.br
-                                Click to clip me!
-                            div.back.well.well-lg.back
-                                strong.strong word
-                                    br.br
-                                Click to clip me back!
-        script(type='text/javascript').
-            var words = !{JSON.stringify(words)};
-            for (var i = 0; i < words.length; i++) {
-                $("#card-" + i).flip();
-            }
