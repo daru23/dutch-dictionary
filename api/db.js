@@ -66,7 +66,7 @@ module.exports = {
             "use strict";
             pool.getConnection(function(err, connection) {
                 // Use the connection
-                connection.query('SELECT `word`.name, `translation`.`translation` FROM `word` INNER JOIN `translation` USING(`id_word`)', function (error, results, fields) {
+                connection.query('SELECT `word`.id_word, `word`.name, `translation`.`translation` FROM `word` INNER JOIN `translation` USING(`id_word`)', function (error, results, fields) {
                     // And done with the connection.
                     connection.release();
 
