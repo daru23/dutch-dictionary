@@ -1,48 +1,27 @@
-doctype html
-html(lang="en")
-    head
-        title= Index
-        script(type="text/javascript", src="https://code.jquery.com/jquery-3.2.0.min.js")
-        script(type="text/javascript", src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js")
+include ./template
+head
+    title= Index
+    script(type="text/javascript", src="https://code.jquery.com/jquery-3.2.0.min.js")
+    script(type="text/javascript", src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js")
 
-        script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-        link(rel="stylesheet", href="/css/card-style.css")
 
-    body
-        nav.navbar.navbar-default
-            .container-fluid
-                .navbar-header
-                    a.navbar-brand Brand
-                #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                    ul.nav.navbar-nav
-                        li.active
-                            a(href="#") Home
-                        li
-                            a Words
-                        li
-                            a Labels
-                    form.navbar-form.navbar-left
-                        .form-group
-                            input(type="text", placeholder="Search").form-control
-                            button(type="submit").btn.btn-default Search
-        div.table-responsive
-            table.table
-                each word, i in words
-                    if ((i % 4) == 0)
-                        tr
-                    td
-                        div(id="card-#{i}").card.style
-                            div.front.alert.alert-info.front
-                                strong.strong #{word.name}
-                                    br.br
-                                Click to clip me!
-                            div.back.well.well-lg.back
-                                strong.strong word
-                                    br.br
-                                Click to clip me back!
-        script(type='text/javascript').
-            var words = !{JSON.stringify(words)};
-            for (var i = 0; i < words.length; i++) {
-                $("#card-" + i).flip();
-            }
+div.table-responsive
+    table.table
+        each word, i in words
+            if ((i % 4) == 0)
+                tr
+            td
+                div(id="card-#{i}").card.style
+                    div.front.alert.alert-info.front
+                        strong.strong #{word.name}
+                            br.br
+                        Click to clip me!
+                    div.back.well.well-lg.back
+                        strong.strong #{word.translation}
+                            br.br
+                        Click to clip me back!
+script(type='text/javascript').
+    var words = !{JSON.stringify(words)};
+    for (var i = 0; i < words.length; i++) {
+        $("#card-" + i).flip();
+    }

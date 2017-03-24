@@ -16,21 +16,31 @@ var api = require('./api-connection');
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade'); // use either jade or ejs       // instruct express to server up static assets
+app.set('view options', {layout: false});
 app.use(express.static('public'));
 
-api.getAllWords(function (words) {
-    "use strict";
-    // set routes
-    console.log(words.mes);
-    app.get('/', function(req, res) {
+
+// set routes
+app.get('/', function(req, res) {
+
+    api.getAllWords(function (words) {
         res.render('index', {"words" : words.mes });
     });
 });
 
-
 app.get('/words', function(req, res) {
-    res.render('words');
+    api.getAllWords(function (words) {
+        res.render('words', {"words" : words.mes });
+    });
 });
+
+app.get('/words/edit/:word', function(req, res) {
+
+    res.render('edit', req.params);
+    // res.send(req.params);
+
+});
+
 
 // Set server port
 app.listen(4000);
