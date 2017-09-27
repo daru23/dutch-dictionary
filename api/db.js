@@ -80,6 +80,25 @@ module.exports = {
         });
     },
 
+    getAllLabels : function  () {
+        return new Promise(function (resolve, reject) {
+            "use strict";
+            pool.getConnection(function(err, connection) {
+                // Use the connection
+                connection.query('SELECT `word`.name FROM `word` WHERE `is_label`="1"', function (error, results, fields) {
+                    // And done with the connection.
+                    connection.release();
+
+                    // Handle error after the release.
+                    if (error) reject(error);
+
+                    resolve(results);
+                    // Don't use the connection here, it has been returned to the pool.
+                });
+            });
+        });
+    },
+
     closePoolConnection : function  () {
         "use strict";
         pool.end(function (err) {

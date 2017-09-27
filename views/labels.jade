@@ -1,0 +1,13 @@
+include ./template.jade
+table.table.table-striped.table-hover
+    tr.info
+        td Label
+        td Options
+    each label, i in labels
+        tr
+            td #{label.name}
+            td
+                a(href="")
+                    span.options.glyphicon.glyphicon-pencil
+                a(href="")
+                    span.options.glyphicon.glyphicon-trash

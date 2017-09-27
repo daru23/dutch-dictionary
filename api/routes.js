@@ -29,6 +29,12 @@ var routes = [
         config   : {
             handler  : handler.getAllWords
         }
+    },
+    {   method   : 'GET',
+        path     : '/labels',
+        config   : {
+            handler  : handler.getAllLabels
+        }
     }
 ];
 

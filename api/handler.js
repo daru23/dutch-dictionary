@@ -33,3 +33,13 @@ exports.getAllWords = function (req, res){
     });
 
 };
+
+exports.getAllLabels = function (req, res){
+
+    db.getAllWords().then(function (labels) {
+        console.log(labels);
+        //SQL close connection
+        res ({mes : labels});
+    });
+
+};

@@ -41,6 +41,11 @@ app.get('/words/edit/:word', function(req, res) {
 
 });
 
+app.get('/labels', function(req, res) {
+    api.getAllLabels(function (labels) {
+        res.render('labels', {"labels" : labels.mes });
+    });
+});
 
 // Set server port
 app.listen(4000);
