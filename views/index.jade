@@ -1,9 +1,11 @@
 include ./template
 head
     title= Index
-    script(type="text/javascript", src="https://code.jquery.com/jquery-3.2.0.min.js")
+    script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.4.min.js")
+    script(type="text/javascript", src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(type="text/javascript", src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js")
-
+    script(type='text/javascript').
+        var words = !{JSON.stringify(words)};
 
 div.table-responsive
     table.table
@@ -12,16 +14,15 @@ div.table-responsive
                 tr
             td
                 div(id="card-#{i}").card.style
-                    div.front.alert.alert-info.front
+                    div.front.alert.alert-info
                         strong.strong #{word.name}
                             br.br
                         Click to clip me!
-                    div.back.well.well-lg.back
+                    div.back.well.well-lg
                         strong.strong #{word.translation}
                             br.br
                         Click to clip me back!
 script(type='text/javascript').
-    var words = !{JSON.stringify(words)};
     for (var i = 0; i < words.length; i++) {
-        $("#card-" + i).flip();
+        $("#card-" + i).flip({trigger: 'click'});
     }
